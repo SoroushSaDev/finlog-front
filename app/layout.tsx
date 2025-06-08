@@ -28,7 +28,7 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body
-            className={`${outfit.variable} ${quicksand.variable} antialiased font-quicksand`}
+            className={`!bg-gradient-to-br from-gray-200 dark:from-gray-900 via-gray-300 dark:via-gray-800 to-gray-400 dark:to-gray-700 min-h-screen ${outfit.variable} ${quicksand.variable} antialiased font-quicksand`}
         >
         {children}
         </body>

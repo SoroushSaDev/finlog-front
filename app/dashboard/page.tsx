@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import {Account, Transaction, User} from "@/src/types/main";
-import {ArrowDownCircleIcon, Bars3Icon, UserCircleIcon} from "@heroicons/react/24/solid";
+import {ArrowDownCircleIcon, ArrowUpCircleIcon, Bars3Icon, UserCircleIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 export default function Dashboard() {
@@ -95,16 +95,16 @@ export default function Dashboard() {
     }, [activeAccount]);
     return (
         <>
-            <div className="fixed top-3 px-3 w-full grid grid-cols-10 gap-6 items-center backdrop-blur-3xl">
+            <div className="fixed top-0 p-3 w-full grid grid-cols-10 gap-6 items-center backdrop-blur-3xl">
                 <div className="flex items-center justify-start space-x-2">
                     <button type="button" title="menu"
-                        className="w-min sm:invisible p-1 rounded-full bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-white">
+                        className="w-min sm:invisible p-1 rounded-full bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white">
                         <Bars3Icon width={25} height={25} className="shadow-2xl"/>
                     </button>
                 </div>
                 <div className="flex items-center justify-center space-x-2 w-full col-span-8">
                     <button type="button"
-                            className="flex items-center rounded-full ps-4 pe-1 py-1 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-white hover:cursor-pointer hover:shadow-2xl"
+                            className="flex items-center rounded-full ps-4 pe-1 py-1 bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white hover:cursor-pointer hover:shadow-2xl"
                             onClick={() => setShowAccounts(true)}>
                         <span className="font-semibold">
                             {activeAccount?.title}
@@ -114,7 +114,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center justify-end space-x-2">
                     <Link href="/"
-                          className="w-min flex items-center justify-end rounded-full px-1 sm:pe-4 py-1 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-white hover:cursor-pointer hover:shadow-2xl">
+                          className="w-min flex items-center justify-end rounded-full px-1 sm:pe-4 py-1 bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white hover:cursor-pointer hover:shadow-2xl">
                         <UserCircleIcon width={25} height={25} className="shadow-2xl"/>
                         <span className="ms-2 max-sm:hidden font-semibold">
                             {user.name}
@@ -130,32 +130,32 @@ export default function Dashboard() {
                     Balance
                 </h2>
                 <div
-                    className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 text-white rounded-lg mt-5 p-3">
-                    <h3 className="text-xl font-semibold">
+                    className="bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white rounded-lg mt-5 p-3">
+                    <h3 className="text-xl font-bold">
                         Latest Transactions
                     </h3>
                     <hr className="my-3"/>
                     <ol className="space-y-2">
                         {transactions.length > 0 ? transactions?.map((transaction: Transaction, index) => (
                             <li key={index} className="flex justify-between items-center">
-                                <span>
+                                <span className="font-semibold">
                                     {transaction.title}
                                 </span>
                                 <span className="font-bold">
                                     {`${transaction.type === 'income' ? '+' : '-'} ${transaction.amount}`}
                                 </span>
                             </li>
-                        )) : (<li>No transactions</li>)}
+                        )) : (<li className="font-semibold">No transactions</li>)}
                     </ol>
                 </div>
             </div>
 
             <div className={`${showAccounts ? 'fixed' : 'hidden'} top-0 p-2 w-full`}>
-                <div className="backdrop-blur-3xl rounded-xl p-3 w-full shadow-2xl">
+                <div className="flex flex-col items-center backdrop-blur-3xl rounded-xl p-3 w-full shadow-2xl">
                     <p className="text-center text-3xl font-bold">
                         Accounts
                     </p>
-                    <ol className="mt-5">
+                    <ol className="mt-10 space-y-2 w-full">
                         {accounts.map((account, key) => (
                             <li key={key} className="flex justify-between items-center font-semibold">
                                 <label htmlFor={`account-${key}`}>
@@ -166,6 +166,11 @@ export default function Dashboard() {
                             </li>
                         ))}
                     </ol>
+                    <button type="button"
+                            className="mt-5 rounded-full p-1 bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white hover:cursor-pointer hover:shadow-2xl"
+                            onClick={() => setShowAccounts(false)}>
+                        <ArrowUpCircleIcon width={25} height={25} className="shadow-2xl"/>
+                    </button>
                 </div>
             </div>
         </>
