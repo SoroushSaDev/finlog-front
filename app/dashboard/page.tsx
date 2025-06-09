@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import {Account, Transaction, User} from "@/src/types/main";
-import {ArrowDownCircleIcon, ArrowUpCircleIcon, Bars3Icon, UserCircleIcon} from "@heroicons/react/24/solid";
+import {ArrowDownCircleIcon, ArrowUpCircleIcon, Bars3Icon, PlusCircleIcon, UserCircleIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 export default function Dashboard() {
@@ -98,13 +98,13 @@ export default function Dashboard() {
             <div className="fixed top-0 p-3 w-full grid grid-cols-10 gap-6 items-center backdrop-blur-3xl">
                 <div className="flex items-center justify-start space-x-2">
                     <button type="button" title="menu"
-                        className="w-min sm:invisible p-1 rounded-full bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white">
+                        className="w-min sm:invisible p-1 rounded-full bg-gradient-to-br from-blue-500 via-green-500 to-indigo-500 dark:from-blue-600 dark:via-green-600 dark:to-indigo-600 text-white">
                         <Bars3Icon width={25} height={25} className="shadow-2xl"/>
                     </button>
                 </div>
                 <div className="flex items-center justify-center space-x-2 w-full col-span-8">
                     <button type="button"
-                            className="flex items-center rounded-full ps-4 pe-1 py-1 bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white hover:cursor-pointer hover:shadow-2xl"
+                            className="flex items-center rounded-full ps-4 pe-1 py-1 bg-gradient-to-br from-blue-500 via-green-500 to-indigo-500 dark:from-blue-600 dark:via-green-600 dark:to-indigo-600 text-white hover:cursor-pointer hover:shadow-2xl"
                             onClick={() => setShowAccounts(true)}>
                         <span className="font-semibold">
                             {activeAccount?.title}
@@ -114,7 +114,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex items-center justify-end space-x-2">
                     <Link href="/"
-                          className="w-min flex items-center justify-end rounded-full px-1 sm:pe-4 py-1 bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white hover:cursor-pointer hover:shadow-2xl">
+                          className="w-min flex items-center justify-end rounded-full px-1 sm:pe-4 py-1 bg-gradient-to-br from-blue-500 via-green-500 to-indigo-500 dark:from-blue-600 dark:via-green-600 dark:to-indigo-600 text-white hover:cursor-pointer hover:shadow-2xl">
                         <UserCircleIcon width={25} height={25} className="shadow-2xl"/>
                         <span className="ms-2 max-sm:hidden font-semibold">
                             {user.name}
@@ -130,7 +130,7 @@ export default function Dashboard() {
                     Balance
                 </h2>
                 <div
-                    className="bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white rounded-lg mt-5 p-3">
+                    className="bg-gradient-to-br from-blue-500 via-green-500 to-indigo-500 dark:from-blue-600 dark:via-green-600 dark:to-indigo-600 text-white rounded-lg mt-5 p-3">
                     <h3 className="text-xl font-bold">
                         Latest Transactions
                     </h3>
@@ -150,24 +150,32 @@ export default function Dashboard() {
                 </div>
             </div>
 
-            <div className={`${showAccounts ? 'fixed' : 'hidden'} top-0 p-2 w-full`}>
-                <div className="flex flex-col items-center backdrop-blur-3xl rounded-xl p-3 w-full shadow-2xl">
-                    <p className="text-center text-3xl font-bold">
-                        Accounts
-                    </p>
-                    <ol className="mt-10 space-y-2 w-full">
+            <div className={`${showAccounts ? 'fixed' : 'hidden'} top-0 flex justify-center items-center p-2 w-full z-50`}>
+                <div className="flex flex-col items-center backdrop-blur-3xl rounded-xl p-3 max-sm:w-full sm:w-[600px] shadow-2xl">
+                    <div className="flex justify-between items-center w-full p-1">
+                        <p className="text-center text-3xl font-bold">
+                            Accounts
+                        </p>
+                        <button type="button" title="close"
+                                className="rounded-full p-1 bg-gradient-to-br from-blue-500 via-green-500 to-indigo-500 dark:from-blue-600 dark:via-green-600 dark:to-indigo-600 text-white hover:cursor-pointer hover:shadow-2xl"
+                                onClick={() => setShowAccounts(false)}>
+                            <PlusCircleIcon width={25} height={25} className="shadow-2xl"/>
+                        </button>
+                    </div>
+                    <ol className="mt-5 w-full">
                         {accounts.map((account, key) => (
-                            <li key={key} className="flex justify-between items-center font-semibold">
-                                <label htmlFor={`account-${key}`}>
+                            <li key={key} className={`p-3 flex justify-between items-center font-semibold backdrop-blur-3xl ${activeAccount?._id == account._id ? 'bg-white/80 dark:bg-black/80' : 'bg-white/40 dark:bg-black/40'} first:rounded-t-xl last:rounded-b-xl not-first:border-t-1 border-white dark:border-black`}>
+                                <label htmlFor={`account-${key}`} className="text-center w-full">
                                     {account.title}
                                 </label>
                                 <input type="radio" id={`account-${key}`} name="active" checked={activeAccount?._id == account._id}
+                                    className="hidden"
                                     onChange={() => {setActiveAccount(account); setShowAccounts(false)}}/>
                             </li>
                         ))}
                     </ol>
-                    <button type="button"
-                            className="mt-5 rounded-full p-1 bg-gradient-to-br from-blue-600 via-green-500 to-indigo-400 text-white hover:cursor-pointer hover:shadow-2xl"
+                    <button type="button" title="close"
+                            className="mt-5 rounded-full p-1 bg-gradient-to-br from-blue-500 via-green-500 to-indigo-500 dark:from-blue-600 dark:via-green-600 dark:to-indigo-600 text-white hover:cursor-pointer hover:shadow-2xl"
                             onClick={() => setShowAccounts(false)}>
                         <ArrowUpCircleIcon width={25} height={25} className="shadow-2xl"/>
                     </button>

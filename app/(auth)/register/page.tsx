@@ -5,12 +5,12 @@ export default function Register() {
         <div
             className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
             <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-                <h1 className="text-9xl max-sm:text-8xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                <h1 className="text-9xl max-sm:text-8xl bg-gradient-to-br from-blue-500 via-green-500 to-indigo-500 dark:from-blue-600 dark:via-green-600 dark:to-indigo-600 inline-block text-transparent bg-clip-text">
                     Register
                 </h1>
                 <p className="text-center w-full">
                     Create your <strong
-                    className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
+                    className="bg-gradient-to-br from-blue-500 via-green-500 to-indigo-500 dark:from-blue-600 dark:via-green-600 dark:to-indigo-600 inline-block text-transparent bg-clip-text">
                     FinLog
                 </strong> account
                 </p>
