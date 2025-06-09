@@ -16,7 +16,7 @@ export default function Login() {
     const login = async () => {
         await axios.post(`${baseUrl}/api/login`, {name: username, password: password}).then((response) => {
             if (response.status === 200) {
-                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("token", response.data.accessToken);
                 localStorage.setItem("user", JSON.stringify(response.data.user));
                 router.push("/dashboard");
             }
